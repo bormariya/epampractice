@@ -19,7 +19,7 @@ public class OneDimensionalArrays {
             System.out.printf("\nMaximal element is %.2f", max);
         }
         catch(NumberFormatException | NegativeArraySizeException e){
-            System.out.print("Input a number sequence!");
+            System.out.print("Input a number sequence!!!");
         }
     }
 }
