@@ -19,7 +19,7 @@ public class Sequence {
             System.out.printf("Minimal number of the sequence = %d\n", i);
             System.out.printf("The sequence: %s", seq.toString().trim());
         }
-        catch(NumberFormatException e){
+        catch(NumberFormatException | ArrayIndexOutOfBoundsException e){
             System.out.println("Input one number of format \"1.23456\"");
         }
 
