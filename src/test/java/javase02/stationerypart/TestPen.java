@@ -5,10 +5,10 @@ import junit.framework.TestCase;
 public class TestPen extends TestCase {
 
     public void testEquals(){
-        Pen blackPen = new Pen("SomeProducer", Color.BLACK);
-        Pen bluePen = new Pen("SomeProducer", Color.BLUE);
-        Pen anotherBlackPen = new Pen("SomeOtherProducer", Color.BLACK);
-        Pen anotherSameBlackPen = new Pen("SomeProducer", Color.BLACK);
+        Pen blackPen = new Pen("SomeProducer", Color.BLACK, 7.5);
+        Pen bluePen = new Pen("SomeProducer", Color.BLUE, 7.5);
+        Pen anotherBlackPen = new Pen("SomeOtherProducer", Color.BLACK, 7.5);
+        Pen anotherSameBlackPen = new Pen("SomeProducer", Color.BLACK, 7.5);
 
         if(blackPen.equals(bluePen))
             System.out.println("blackPen почему-то равно bluePen");
@@ -23,10 +23,10 @@ public class TestPen extends TestCase {
     }
 
     public void testHashCode(){
-        Pen blackPen = new Pen("SomeProducer", Color.BLACK);
-        Pen bluePen = new Pen("SomeProducer", Color.BLUE);
-        Pen anotherBlackPen = new Pen("SomeOtherProducer", Color.BLACK);
-        Pen anotherSameBlackPen = new Pen("SomeProducer", Color.BLACK);
+        Pen blackPen = new Pen("SomeProducer", Color.BLACK, 7.5);
+        Pen bluePen = new Pen("SomeProducer", Color.BLUE, 7.5);
+        Pen anotherBlackPen = new Pen("SomeOtherProducer", Color.BLACK, 7.5);
+        Pen anotherSameBlackPen = new Pen("SomeProducer", Color.BLACK, 7.5);
 
         if(blackPen.hashCode() == bluePen.hashCode())
             System.out.println("hashCode blackPen почему-то равен hashCode bluePen");
@@ -39,7 +39,7 @@ public class TestPen extends TestCase {
     }
 
     public void testToString(){
-        Pen blackPen = new Pen("SomeProducer", Color.BLACK);
+        Pen blackPen = new Pen("SomeProducer", Color.BLACK, 7.5);
 
         System.out.println(blackPen.toString());
     }

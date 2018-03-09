@@ -1,30 +1,30 @@
 package javase02.stationerypart;
 
-public class Pen implements  Stationery{
+public class Ruler implements Stationery {
 
     private String producer;
-    private Color color;
+    private Double maxLength;
     private Double price;
 
-    Pen(String producer, Color color, Double price){
+    Ruler(String producer, Double maxLength, Double price){
         this.producer = producer;
-        this.color = color;
+        this.maxLength = maxLength;
         this.price = price;
     }
 
     @Override
     public boolean equals(Object obj) {
-        return(obj instanceof Pen
-                && this.producer.equals(((Pen)obj).producer)
-                && this.color.equals(((Pen)obj).color)
-                && this.price.equals(((Pen)obj).price));
+        return(obj instanceof Ruler
+                && this.producer.equals(((Ruler)obj).producer)
+                && this.maxLength.equals(((Ruler)obj).maxLength)
+                && this.price.equals(((Ruler)obj).price));
     }
 
     @Override
     public int hashCode() {
         int hashCode = 37;
         hashCode = hashCode*17+producer.hashCode();
-        hashCode = hashCode*17+color.hashCode();
+        hashCode = hashCode*17+maxLength.hashCode();
         hashCode = hashCode*17+price.hashCode();
         return hashCode;
     }
@@ -33,7 +33,8 @@ public class Pen implements  Stationery{
     public String toString() {
         return this.getClass().getSimpleName() + ": " +
                 this.producer + ", " +
-                this.color.toString() + ", " +
+                this.maxLength + ", " +
                 this.price + " RUB";
     }
 }
+

@@ -5,7 +5,10 @@ public enum Color {
     BLACK(1),
     BLUE(2),
     RED(3),
-    GREEN(4);
+    GREEN(4),
+    GRAY(5),
+    YELLOW(6),
+    BROWN(7);
 
     int index;
 

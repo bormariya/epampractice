@@ -1,30 +1,30 @@
 package javase02.stationerypart;
 
-public class Pen implements  Stationery{
+public class Eraser implements Stationery {
 
     private String producer;
-    private Color color;
+    private String material;
     private Double price;
 
-    Pen(String producer, Color color, Double price){
+    Eraser(String producer, String material, Double price){
         this.producer = producer;
-        this.color = color;
+        this.material = material;
         this.price = price;
     }
 
     @Override
     public boolean equals(Object obj) {
-        return(obj instanceof Pen
-                && this.producer.equals(((Pen)obj).producer)
-                && this.color.equals(((Pen)obj).color)
-                && this.price.equals(((Pen)obj).price));
+        return(obj instanceof Eraser
+                && this.producer.equals(((Eraser)obj).producer)
+                && this.material.equals(((Eraser)obj).material)
+                && this.price.equals(((Eraser)obj).price));
     }
 
     @Override
     public int hashCode() {
         int hashCode = 37;
         hashCode = hashCode*17+producer.hashCode();
-        hashCode = hashCode*17+color.hashCode();
+        hashCode = hashCode*17+material.hashCode();
         hashCode = hashCode*17+price.hashCode();
         return hashCode;
     }
@@ -33,7 +33,7 @@ public class Pen implements  Stationery{
     public String toString() {
         return this.getClass().getSimpleName() + ": " +
                 this.producer + ", " +
-                this.color.toString() + ", " +
+                this.material + ", " +
                 this.price + " RUB";
     }
 }
