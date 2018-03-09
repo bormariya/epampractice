@@ -36,4 +36,9 @@ public class Eraser implements Stationery {
                 this.material + ", " +
                 this.price + " RUB";
     }
+
+    @Override
+    public Double getPrice() {
+        return this.price;
+    }
 }

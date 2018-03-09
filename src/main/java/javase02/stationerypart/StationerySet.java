@@ -25,4 +25,15 @@ public class StationerySet {
     public ArrayList<Stationery> getSet() {
         return set;
     }
+
+    public Double getFullPriceOfSet(){
+        Double sum = 0.0;
+        for (Stationery element : this.getSet()) {
+            sum += element.getPrice();
+        }
+
+        return sum;
+    }
+
+
 }

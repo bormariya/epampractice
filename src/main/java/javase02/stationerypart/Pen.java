@@ -36,4 +36,9 @@ public class Pen implements  Stationery{
                 this.color.toString() + ", " +
                 this.price + " RUB";
     }
+
+    @Override
+    public Double getPrice() {
+        return this.price;
+    }
 }

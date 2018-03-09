@@ -36,5 +36,9 @@ public class Ruler implements Stationery {
                 this.maxLength + ", " +
                 this.price + " RUB";
     }
-}
 
+    @Override
+    public Double getPrice() {
+        return this.price;
+    }
+}

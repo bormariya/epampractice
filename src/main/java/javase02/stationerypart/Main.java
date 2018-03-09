@@ -12,5 +12,7 @@ public class Main {
         for (Stationery element : nubSet.getSet()) {
             System.out.println(element);
         }
+
+        System.out.printf("Full price of set = %.2f", nubSet.getFullPriceOfSet());
     }
 }

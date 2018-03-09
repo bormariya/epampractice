@@ -40,4 +40,8 @@ public class Divider implements Stationery {
                 this.rigidity.toString() + ", " +
                 this.price + " RUB";
     }
+
+    public Double getPrice() {
+        return this.price;
+    }
 }
