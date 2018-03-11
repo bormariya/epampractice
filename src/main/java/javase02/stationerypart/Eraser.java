@@ -5,6 +5,7 @@ public class Eraser implements Stationery {
     private String producer;
     private String material;
     private Double price;
+    private String name = getClass().getSimpleName();
 
     Eraser(String producer, String material, Double price){
         this.producer = producer;
@@ -40,5 +41,9 @@ public class Eraser implements Stationery {
     @Override
     public Double getPrice() {
         return this.price;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

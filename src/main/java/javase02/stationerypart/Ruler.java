@@ -5,6 +5,7 @@ public class Ruler implements Stationery {
     private String producer;
     private Double maxLength;
     private Double price;
+    private String name = getClass().getSimpleName();
 
     Ruler(String producer, Double maxLength, Double price){
         this.producer = producer;
@@ -40,5 +41,9 @@ public class Ruler implements Stationery {
     @Override
     public Double getPrice() {
         return this.price;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

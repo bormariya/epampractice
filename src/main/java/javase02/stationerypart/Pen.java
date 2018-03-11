@@ -5,6 +5,7 @@ public class Pen implements  Stationery{
     private String producer;
     private Color color;
     private Double price;
+    private String name = getClass().getSimpleName();
 
     Pen(String producer, Color color, Double price){
         this.producer = producer;
@@ -40,5 +41,9 @@ public class Pen implements  Stationery{
     @Override
     public Double getPrice() {
         return this.price;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

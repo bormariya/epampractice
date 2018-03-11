@@ -5,6 +5,7 @@ public class Divider implements Stationery {
     private Double diameter;
     private Rigidity rigidity;
     private Double price;
+    private String name = getClass().getSimpleName();
 
     Divider(String producer, Double diameter, Rigidity rigidity, Double price){
         this.producer = producer;
@@ -43,5 +44,9 @@ public class Divider implements Stationery {
 
     public Double getPrice() {
         return this.price;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

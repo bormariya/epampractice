@@ -6,6 +6,7 @@ public class Pencil implements Stationery {
     private Color color;
     private Rigidity rigidity;
     private Double price;
+    private String name = getClass().getSimpleName();
 
 
     Pencil(String producer, Color color, Rigidity rigidity, Double price) {
@@ -46,5 +47,9 @@ public class Pencil implements Stationery {
     @Override
     public Double getPrice() {
         return this.price;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }
