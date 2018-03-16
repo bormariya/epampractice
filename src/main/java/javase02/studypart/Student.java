@@ -28,16 +28,22 @@ public class Student {
                 && this.id.equals(((Student)obj).id));
     }
 
-    public void setMarks(Map<Discipline, Number> marks) {
-        this.marks = marks;
-    }
-
     public void setMark(Discipline discipline, Number mark){
             if(discipline.isIntegerMark() && mark instanceof Integer ||
                     !discipline.isIntegerMark() && mark instanceof Double)
                 this.marks.put(discipline, mark);
-            else throw new NumberFormatException("Mark should be in " +
+            else throw new NumberFormatException("Mark of " + discipline + " should be in " +
                     (discipline.isIntegerMark() ? "'Integer' " : "'Double' ") + "format");
+    }
+
+    public void setMarks(Map<Discipline, Number> marks) {
+        for (Discipline discipline : marks.keySet()) {
+            this.setMark(discipline, marks.get(discipline));
+        }
+    }
+
+    public void setMark(Group group, Number mark){
+        this.setMark(group.getDiscipline(), mark);
     }
 
     private HashMap<Discipline, Number> getMarks(Discipline... disciplines) {

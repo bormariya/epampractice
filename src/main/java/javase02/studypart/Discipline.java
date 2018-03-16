@@ -1,24 +1,20 @@
 package javase02.studypart;
 
-class Discipline {
-    private String name;
-    private boolean isIntegerMark = true;
+@EnumArgument(argument = "isIntegerMark")
+enum Discipline {
+    MATH(false),
+    ENGLISH(true),
+    JAVA(false),
+    ALGORITHMS(true),
+    ECONOMICS(true);
 
-    Discipline(String name){
-        this.name = name;
-    }
+    private boolean isIntegerMark;
 
-    Discipline(String name, boolean isIntegerMark){
-        this.name = name;
+    Discipline(boolean isIntegerMark){
         this.isIntegerMark = isIntegerMark;
     }
 
-    public boolean isIntegerMark(){
+    public boolean isIntegerMark() {
         return this.isIntegerMark;
-    }
-
-    @Override
-    public String toString() {
-        return this.name;
     }
 }

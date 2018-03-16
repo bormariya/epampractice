@@ -5,24 +5,20 @@ import java.util.Map;
 
 public class GroupUtils {
 
-    public static Group[] searchGroupsByStudent(Student student, Group... groups){
-        ArrayList<Group> listOfGroups = new ArrayList<>();
+    public static Group[] getGroupsByStudent(Student student){
+        ArrayList<Group> groups = Group.getAllGroups();
         for (Group group : groups) {
-            for(Student studentOfGroup : group.getListOfStudents()){
-                if(student.equals(studentOfGroup)) {
-                    listOfGroups.add(group);
-                    break;
-                }
-            }
+            if(!group.hasStudent(student))
+                groups.remove(group);
         }
 
-        Group[] a = new Group[listOfGroups.size()];
-        listOfGroups.toArray(a);
+        Group[] a = new Group[groups.size()];
+        groups.toArray(a);
         return a;
     }
 
-    public static Map<Discipline, Number> getMarksByStudentGroup(Student student, Group... groups){
-        Group[] listOfStudentGroup = searchGroupsByStudent(student, groups);
+    public static Map<Discipline, Number> getMarksByStudent(Student student){
+        Group[] listOfStudentGroup = GroupUtils.getGroupsByStudent(student);
         return student.getMarks(listOfStudentGroup);
     }
 }
