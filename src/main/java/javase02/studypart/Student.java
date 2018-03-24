@@ -1,5 +1,8 @@
 package javase02.studypart;
 
+import com.sun.istack.Nullable;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +12,8 @@ public class Student {
     private String middleName;
     private Integer id;
 
-    private Map<Discipline, Number> marks;
+
+    private Map<Discipline, ArrayList<Number>> marks;
 
     Student(String lastName, String name, String middleName, Integer id){
         this.lastName = lastName;
@@ -28,26 +32,49 @@ public class Student {
                 && this.id.equals(((Student)obj).id));
     }
 
-    public void setMark(Discipline discipline, Number mark){
+    public Student setMark(Discipline discipline, Number mark){
+        if(GroupUtils.getGroupByDiscipline(discipline).hasStudent(this))
             if(discipline.isIntegerMark() && mark instanceof Integer ||
                     !discipline.isIntegerMark() && mark instanceof Double)
-                this.marks.put(discipline, mark);
-            else throw new NumberFormatException("Mark of " + discipline + " should be in " +
-                    (discipline.isIntegerMark() ? "'Integer' " : "'Double' ") + "format");
+                if (this.marks.get(discipline) != null)
+                    this.marks.get(discipline).add(mark);
+                else {
+                    this.marks.put(discipline, new ArrayList<Number>());
+                    this.marks.get(discipline).add(mark);
+                }
+            else throw new NumberFormatException("Mark of " + discipline + " for student " + this.getFullName() +
+                    " should be in " + (discipline.isIntegerMark() ? "'Integer' " : "'Double' ") + "format");
+
+        return this;
     }
 
-    public void setMarks(Map<Discipline, Number> marks) {
+    public Student setMarks(Discipline discipline, Number... marks){
+        if(GroupUtils.getGroupByDiscipline(discipline) != null &&
+                GroupUtils.getGroupByDiscipline(discipline).hasStudent(this))
+            for (Number mark : marks) {
+                this.setMark(discipline, mark);
+            }
+        return this;
+    }
+
+    public Student setMarks(Map<Discipline, ArrayList<Number>> marks) {
         for (Discipline discipline : marks.keySet()) {
-            this.setMark(discipline, marks.get(discipline));
+            if(GroupUtils.getGroupByDiscipline(discipline) != null &&
+                    GroupUtils.getGroupByDiscipline(discipline).hasStudent(this))
+                for(Number mark : marks.get(discipline)){
+                    this.setMark(discipline, mark);
+                }
         }
+
+        return this;
     }
 
-    public void setMark(Group group, Number mark){
-        this.setMark(group.getDiscipline(), mark);
+    public String getFullName(){
+        return String.format("%s %s %s", this.lastName, this.name, this.middleName);
     }
 
-    private HashMap<Discipline, Number> getMarks(Discipline... disciplines) {
-        HashMap<Discipline, Number> marksByTheDiscipline = new HashMap<>();
+    private HashMap<Discipline, ArrayList<Number>> getMarks(Discipline... disciplines) {
+        HashMap<Discipline, ArrayList<Number>> marksByTheDiscipline = new HashMap<>();
         for(Discipline discipline : disciplines) {
             if(this.marks.containsKey(discipline))
                 marksByTheDiscipline.put(discipline, this.marks.get(discipline));
@@ -55,12 +82,26 @@ public class Student {
         return marksByTheDiscipline;
     }
 
-    public HashMap<Discipline, Number> getMarks(Group... groups) {
+    public HashMap<Discipline, ArrayList<Number>> getMarks(Group... groups) {
         Discipline[] disciplines = new Discipline[groups.length];
         for (int i = 0; i < groups.length; i++){
             disciplines[i] = groups[i].getDiscipline();
         }
 
         return this.getMarks(disciplines);
+    }
+
+    public String getMarksAsString(Group... groups){
+        Map<Discipline, ArrayList<Number>> marks = this.getMarks(groups);
+        StringBuilder builder = new StringBuilder();
+
+        for(Discipline discipline : marks.keySet()){
+            builder.append(discipline).append(": ");
+            for(Number mark : marks.get(discipline)){
+                builder.append(mark).append(" ");
+            }
+            builder.append("\n");
+        }
+        return builder.toString();
     }
 }

@@ -1,32 +1,62 @@
 package javase02.studypart;
 
-import java.util.ArrayList;
+import lombok.EqualsAndHashCode;
 
+import java.util.*;
+
+@EqualsAndHashCode
 public class Group {
+    private Integer number;
     private String name;
     private Discipline discipline;
-    private Student[] students;
+    private Set<Student> students;
 
-    private static ArrayList<Group> allGroups = new ArrayList<>();
+    private static Set<Group> allGroups = new HashSet<>();
 
-    Group(Discipline discipline, String name, Student... students){
+    Group(Integer number, Discipline discipline, String name, Student... students){
+        this.number = number;
         this.discipline = discipline;
         this.name = name;
-        this.students = students;
+
+        this.students = new HashSet<>();
+        this.students.addAll(Arrays.asList(students));
+
         allGroups.add(this);
     }
 
-    public static ArrayList<Group> getAllGroups(){
+    public static Set<Group> getAllGroups(){
         return allGroups;
     }
 
-    public boolean hasStudent(Student student){
-        for (Student human : students) {
-            if (human.equals(student))
-                return true;
+    public Group setMark(Student student, Number mark){
+        if(this.hasStudent(student))
+            student.setMark(this.getDiscipline(), mark);
+
+        return this;
+    }
+
+    public Group setMarks(Student student, Number... marks){
+        if(this.hasStudent(student))
+            for(Number mark : marks){
+                student.setMark(this.getDiscipline(), mark);
+            }
+
+        return this;
+    }
+
+    public Group setMarks(Map<Student, ArrayList<Number>> marks){
+        for (Student student : marks.keySet()) {
+            if(this.hasStudent(student))
+                for(Number mark : marks.get(student)){
+                    student.setMark(this.getDiscipline(), mark);
+                }
         }
 
-        return false;
+        return this;
+    }
+
+    public boolean hasStudent(Student student){
+        return students.contains(student);
     }
 
     public Discipline getDiscipline() {
