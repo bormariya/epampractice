@@ -4,18 +4,18 @@ import java.io.Closeable;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class JavaWriter implements Closeable{
+public class JavaByteWriter implements Closeable{
 
-    private static JavaWriter instance;
+    private static JavaByteWriter instance;
     private FileOutputStream outFile;
 
-    private JavaWriter(String path) throws IOException {
+    private JavaByteWriter(String path) throws IOException {
         outFile = new FileOutputStream(path);
     }
 
-    public static JavaWriter getInstance(String path) throws IOException {
+    public static JavaByteWriter getInstance(String path) throws IOException {
         if(instance == null)
-            instance = new JavaWriter(path);
+            instance = new JavaByteWriter(path);
 
         return instance;
     }

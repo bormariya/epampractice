@@ -4,17 +4,17 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        JavaReader javaReader = JavaReader
+        JavaByteReader javaByteReader = JavaByteReader
                 .getInstance("src\\main\\java\\javase03\\t03\\FileController.java");
-        System.out.println("Java key words in file:\n" + javaReader.getKeyWords());
-        System.out.println("Total count of java key words = " + javaReader.getWordsCount());
-        System.out.println("Number of unique java key words = " + javaReader.getUniqueWordsCount());
-        javaReader.close();
+        System.out.println("Java key words in file:\n" + javaByteReader.getKeyWords());
+        System.out.println("Total count of java key words = " + javaByteReader.getWordsCount());
+        System.out.println("Number of unique java key words = " + javaByteReader.getUniqueWordsCount());
+        javaByteReader.close();
 
-        JavaWriter javaWriter = JavaWriter.getInstance("KeyWords_result.txt");
-        javaWriter.writeDataToFile(String.format("Java key words in file:%n%s", javaReader.getKeyWords()));
-        javaWriter.writeDataToFile(String.format("Total count of java key words = %d%n", javaReader.getWordsCount()));
-        javaWriter.writeDataToFile(String.format("Number of unique java key words = %d%n", javaReader.getUniqueWordsCount()));
-        javaWriter.close();
+        JavaByteWriter javaByteWriter = JavaByteWriter.getInstance("KeyWords_result.txt");
+        javaByteWriter.writeDataToFile(String.format("Java key words in file:%n%s", javaByteReader.getKeyWords()));
+        javaByteWriter.writeDataToFile(String.format("Total count of java key words = %d%n", javaByteReader.getWordsCount()));
+        javaByteWriter.writeDataToFile(String.format("Number of unique java key words = %d%n", javaByteReader.getUniqueWordsCount()));
+        javaByteWriter.close();
     }
 }

@@ -5,19 +5,19 @@ import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class JavaReader implements Closeable{
-    private static JavaReader instance;
+public class JavaByteReader implements Closeable{
+    private static JavaByteReader instance;
     private FileInputStream fileStream;
     private Integer wordsCount;
     private HashSet<String> keyWords;
 
-    private JavaReader(String path) throws FileNotFoundException {
+    private JavaByteReader(String path) throws FileNotFoundException {
         fileStream = new FileInputStream(path);
     }
 
-    public static JavaReader getInstance(String path) throws FileNotFoundException {
+    public static JavaByteReader getInstance(String path) throws FileNotFoundException {
         if(instance == null)
-            instance = new JavaReader(path);
+            instance = new JavaByteReader(path);
 
         return instance;
     }
