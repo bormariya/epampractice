@@ -1,0 +1,19 @@
+Java key words in file:
+new
+private
+package
+static
+import
+this
+for
+while
+int
+boolean
+public
+throw
+char
+class
+if
+return
+Total count of java key words = 47
+Number of unique java key words = 16
