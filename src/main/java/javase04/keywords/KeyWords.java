@@ -1,4 +1,4 @@
-package javase04.t01;
+package javase04.keywords;
 
 public enum KeyWords {
     ABSTRACT,
