@@ -7,7 +7,7 @@ import java.nio.charset.Charset;
 
 @SuppressWarnings("unused")
 public class MyFileWriter implements Closeable{
-    private static MyFileWriter instance;
+    private boolean isAppendable = true;
     private BufferedWriter bufferedWriter;
     @Getter
     private String path;
@@ -16,27 +16,45 @@ public class MyFileWriter implements Closeable{
 
     private MyFileWriter(String path, Charset charset) throws IOException {
         bufferedWriter = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(path), charset));
+                new OutputStreamWriter(new FileOutputStream(path, isAppendable), charset));
         this.path = path;
         this.charset = charset;
 
     }
 
-    public static MyFileWriter getInstance(String path, Charset charset) throws IOException {
-        if (instance == null)
-            instance = new MyFileWriter(path, charset);
+    public static MyFileWriter create(String path, Charset charset) throws IOException {
+        return new MyFileWriter(path, charset);
+    }
 
-        return instance;
+    public static MyFileWriter create(String path) throws IOException {
+        return new MyFileWriter(path, Charset.forName("utf-8"));
+    }
+
+    public void writeNewData(String data) throws IOException {
+        if(this.isAppendable){
+            this.isAppendable = false;
+            bufferedWriter = new BufferedWriter(
+                    new OutputStreamWriter(new FileOutputStream(path, isAppendable), charset));
+        }
+
+        bufferedWriter.write(data);
     }
 
     public void writeData(String data) throws IOException {
+        if(!this.isAppendable){
+            this.isAppendable = true;
+            bufferedWriter = new BufferedWriter(
+                    new OutputStreamWriter(new FileOutputStream(path, isAppendable), charset));
+        }
+
+        bufferedWriter.newLine();
         bufferedWriter.write(data);
     }
 
     public void setFileForWriting(String path, Charset charset) throws FileNotFoundException {
         bufferedWriter = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(path), charset));
-    }
+                new OutputStreamWriter(new FileOutputStream(path, isAppendable), charset));
+}
 
     public void setFileForReading(String path) throws FileNotFoundException {
         bufferedWriter = new BufferedWriter(

@@ -5,11 +5,11 @@ import java.nio.charset.Charset;
 
 public class FromUTF8ToUTF16 {
     public static void main(String[] args) throws IOException {
-        MyFileReader reader = MyFileReader.getInstance("one.txt", Charset.forName("utf-8"));
+        MyFileReader reader = MyFileReader.create("one.txt", Charset.forName("utf-8"));
         System.out.println(reader.getContent());
 
-        MyFileWriter writer = MyFileWriter.getInstance("result.txt", Charset.forName("utf-16"));
-        writer.writeData(reader.getContent());
+        MyFileWriter writer = MyFileWriter.create("result.txt", Charset.forName("utf-16"));
+        writer.writeNewData(reader.getContent());
 
         reader.setCharset(Charset.forName("utf-16"));
         System.out.println(reader.getContent());

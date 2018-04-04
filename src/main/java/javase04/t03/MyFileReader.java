@@ -7,7 +7,6 @@ import java.nio.charset.Charset;
 
 @SuppressWarnings("unused")
 public class MyFileReader implements  Closeable{
-    private static MyFileReader instance;
     private BufferedReader bufferedReader;
     @Getter
     private String path;
@@ -22,21 +21,20 @@ public class MyFileReader implements  Closeable{
 
     }
 
-    public static MyFileReader getInstance(String path, Charset charset) throws IOException {
-        if(instance == null)
-            instance = new MyFileReader(path, charset);
+    public static MyFileReader create(String path, Charset charset) throws IOException {
+        return new MyFileReader(path, charset);
+    }
 
-        return instance;
+    public static MyFileReader create(String path) throws IOException {
+        return new MyFileReader(path, Charset.forName("utf-8"));
     }
 
     public String getContent() throws IOException {
-
-
         bufferedReader.lines();
         StringBuilder builder = new StringBuilder();
         String line = bufferedReader.readLine();
         while(line != null){
-            builder.append(line);
+            builder.append(line).append("\n");
             line = bufferedReader.readLine();
         }
 
